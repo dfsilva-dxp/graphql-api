@@ -2,11 +2,12 @@
   "name": "graphql",
   "version": "1.0.0",
   "description": "Curso de GraphQL e Apollo Server + Apollo Client",
-  "main": "src/index.js",
+  "main": "index.js",
   "repository": "https://github.com/daniel-silva-dxp/graphql-api.git",
   "author": "Daniel Silva <dani3l.dxp@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "dev": "nodemon -r sucrase/register src/index.js",
     "lint": "eslint src --max-warnings=0"
   },
   "husky": {
@@ -24,6 +25,9 @@
     "graphql": "^16.3.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.8",
+    "@babel/preset-env": "^7.16.11",
     "@types/node": "^17.0.23",
     "@types/react": "^17.0.43",
     "@typescript-eslint/eslint-plugin": "^5.18.0",
@@ -34,7 +38,10 @@
     "eslint-plugin-react": "^7.29.4",
     "husky": "^7.0.4",
     "lint-staged": "^12.3.7",
+    "nodemon": "^2.0.15",
     "prettier": "2.6.2",
+    "sucrase": "^3.20.3",
+    "ts-node": "^10.7.0",
     "typescript": "^4.6.3"
   }
 }
