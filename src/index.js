@@ -2,18 +2,20 @@ import { ApolloServer, gql } from "apollo-server";
 
 const typeDefs = gql`
   type Query {
-    hello: String
-    name: String!
+    currentDate: String!
   }
 `;
 
 const resolvers = {
   Query: {
-    hello: () => {
-      return "Olá Mundo!";
-    },
-    name: () => {
-      return "Daniel Silva";
+    currentDate: () => {
+      const date = new Date();
+
+      return new Intl.DateTimeFormat("pt-BR", {
+        day: "numeric",
+        month: "numeric",
+        year: "numeric"
+      }).format(date);
     }
   }
 };
