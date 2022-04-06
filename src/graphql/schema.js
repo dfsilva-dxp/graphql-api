@@ -1,8 +1,7 @@
 import { gql } from "apollo-server";
-import { customerResolvers } from "./customer/resolvers";
-import { customerTypeDefs } from "./customer/typedefs";
-import { productResolvers } from "./products/resolvers";
-import { productTypeDefs } from "./products/typedefs";
+
+import { userResolvers } from "./users/resolvers";
+import { usersTypeDefs } from "./users/typedefs";
 
 const rootTypeDefs = gql`
   type Query {
@@ -16,5 +15,5 @@ const rootResolvers = {
   }
 };
 
-export const typeDefs = [rootTypeDefs, customerTypeDefs, productTypeDefs];
-export const resolvers = [rootResolvers, customerResolvers, productResolvers];
+export const typeDefs = [rootTypeDefs, usersTypeDefs];
+export const resolvers = [rootResolvers, userResolvers];
