@@ -11,6 +11,6 @@ export const postsTypeDefs = gql`
     title: String!
     body: String!
     indexRef: Int!
-    createdAt: String!
+    created_at: String!
   }
 `;

@@ -10,5 +10,13 @@ export const userResolvers = {
 
       return data;
     }
+  },
+  User: {
+    created_at: (user) => {
+      return new Intl.DateTimeFormat("pt-BR", {
+        dateStyle: "short",
+        timeStyle: "short"
+      }).format(new Date(user.createdAt));
+    }
   }
 };
