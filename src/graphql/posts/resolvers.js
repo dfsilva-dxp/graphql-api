@@ -5,9 +5,14 @@ export const postResolvers = {
 
       return data;
     },
+    posts: async (_, { filter }, { api }) => {
+      const queryParams = new URLSearchParams(filter);
 
-    posts: async (_, __, { api }) => {
-      const data = await api.get("posts").then(({ data }) => data);
+      const url = queryParams.toString()
+        ? `posts/?${queryParams.toString()}`
+        : "posts";
+
+      const data = await api.get(url).then(({ data }) => data);
 
       return data;
     }

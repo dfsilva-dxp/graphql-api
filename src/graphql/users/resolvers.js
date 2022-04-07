@@ -5,8 +5,16 @@ export const userResolvers = {
 
       return data;
     },
-    users: async (_, __, { api }) => {
-      const data = await api.get("users").then(({ data }) => data);
+    users: async (_, { filter }, { api }) => {
+      const queryParams = new URLSearchParams(filter);
+
+      const url = queryParams.toString()
+        ? `users/?${queryParams.toString()}`
+        : "users";
+
+      console.log(url);
+
+      const data = await api.get(url).then(({ data }) => data);
 
       return data;
     }
