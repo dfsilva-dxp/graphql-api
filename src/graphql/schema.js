@@ -4,6 +4,7 @@ import { filtersTypeDeds } from "./filters/typedefs";
 import { postsTypeDefs } from "./posts/typedefs";
 import { userTypeDefs } from "./users/typedefs";
 
+import { filtersResolvers } from "./filters/resolvers";
 import { postResolvers } from "./posts/resolvers";
 import { userResolvers } from "./users/resolvers";
 
@@ -25,4 +26,9 @@ export const typeDefs = [
   postsTypeDefs,
   filtersTypeDeds
 ];
-export const resolvers = [rootResolvers, userResolvers, postResolvers];
+export const resolvers = [
+  rootResolvers,
+  userResolvers,
+  postResolvers,
+  filtersResolvers
+];
