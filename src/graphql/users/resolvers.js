@@ -1,7 +1,13 @@
 export const userResolvers = {
   Query: {
     user: async (_, { id }, { api }) => {
-      const data = await api.get(`users/${id}`).then(({ data }) => data);
+      const data = await api
+        .get(`users/${id}`)
+        .then(({ data }) => data)
+        .catch(({ response }) => ({
+          status: response.status,
+          message: `User ${response.statusText}`
+        }));
 
       return data;
     },
@@ -11,8 +17,6 @@ export const userResolvers = {
       const url = queryParams.toString()
         ? `users/?${queryParams.toString()}`
         : "users";
-
-      console.log(url);
 
       const data = await api.get(url).then(({ data }) => data);
 
@@ -25,6 +29,15 @@ export const userResolvers = {
         dateStyle: "short",
         timeStyle: "short"
       }).format(new Date(user.createdAt));
+    }
+  },
+
+  UserResult: {
+    __resolveType: (user) => {
+      if (typeof user.status !== "undefined") return "UserNotFound";
+      if (typeof user.id !== "undefined") return "User";
+
+      return null;
     }
   }
 };
