@@ -17,7 +17,12 @@ export const userTypeDefs = gql`
     created_at: String!
   }
 
-  type UserNotFound {
+  interface UserError {
+    status: Int!
+    message: String!
+  }
+
+  type UserNotFound implements UserError {
     status: Int!
     message: String!
   }

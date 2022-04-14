@@ -39,5 +39,13 @@ export const userResolvers = {
 
       return null;
     }
+  },
+
+  UserError: {
+    __resolveType: (user) => {
+      if (typeof user.status !== "undefined") return "UserNotFound";
+
+      return null;
+    }
   }
 };
