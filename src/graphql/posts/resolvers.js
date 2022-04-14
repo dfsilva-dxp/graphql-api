@@ -31,6 +31,12 @@ export const postResolvers = {
         dateStyle: "short",
         timeStyle: "short"
       }).format(new Date(post.createdAt));
+    },
+
+    user: async ({ userId }, _, { api }) => {
+      const data = await api.get(`users/${userId}`).then(({ data }) => data);
+
+      return data;
     }
   },
 
