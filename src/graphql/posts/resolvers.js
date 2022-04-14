@@ -1,29 +1,29 @@
+const post = async (_, { id }, { api }) => {
+  const data = await api
+    .get(`posts/${id}`)
+    .then(({ data }) => data)
+    .catch(({ response }) => ({
+      status: response.status,
+      message: `Post ${response.statusText}`
+    }));
+
+  return data;
+};
+
+const posts = async (_, { filter }, { api }) => {
+  const queryParams = new URLSearchParams(filter);
+
+  const url = queryParams.toString()
+    ? `posts/?${queryParams.toString()}`
+    : "posts";
+
+  const data = await api.get(url).then(({ data }) => data);
+
+  return data;
+};
+
 export const postResolvers = {
-  Query: {
-    post: async (_, { id }, { api }) => {
-      const data = await api
-        .get(`posts/${id}`)
-        .then(({ data }) => data)
-        .catch(({ response }) => ({
-          status: response.status,
-          message: `Post ${response.statusText}`
-        }));
-
-      return data;
-    },
-
-    posts: async (_, { filter }, { api }) => {
-      const queryParams = new URLSearchParams(filter);
-
-      const url = queryParams.toString()
-        ? `posts/?${queryParams.toString()}`
-        : "posts";
-
-      const data = await api.get(url).then(({ data }) => data);
-
-      return data;
-    }
-  },
+  Query: { post, posts },
 
   Post: {
     created_at: (post) => {

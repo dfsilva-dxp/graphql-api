@@ -1,28 +1,30 @@
+const user = async (_, { id }, { api }) => {
+  const data = await api
+    .get(`users/${id}`)
+    .then(({ data }) => data)
+    .catch(({ response }) => ({
+      status: response.status,
+      message: `User ${response.statusText}`
+    }));
+
+  return data;
+};
+
+const users = async (_, { filter }, { api }) => {
+  const queryParams = new URLSearchParams(filter);
+
+  const url = queryParams.toString()
+    ? `users/?${queryParams.toString()}`
+    : "users";
+
+  const data = await api.get(url).then(({ data }) => data);
+
+  return data;
+};
+
 export const userResolvers = {
-  Query: {
-    user: async (_, { id }, { api }) => {
-      const data = await api
-        .get(`users/${id}`)
-        .then(({ data }) => data)
-        .catch(({ response }) => ({
-          status: response.status,
-          message: `User ${response.statusText}`
-        }));
+  Query: { user, users },
 
-      return data;
-    },
-    users: async (_, { filter }, { api }) => {
-      const queryParams = new URLSearchParams(filter);
-
-      const url = queryParams.toString()
-        ? `users/?${queryParams.toString()}`
-        : "users";
-
-      const data = await api.get(url).then(({ data }) => data);
-
-      return data;
-    }
-  },
   User: {
     created_at: (user) => {
       return new Intl.DateTimeFormat("pt-BR", {
