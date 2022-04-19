@@ -7,7 +7,7 @@
   "author": "Daniel Silva <dani3l.dxp@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon -r sucrase/register src/index.js",
+    "dev": "nodemon -r dotenv/config -r sucrase/register src/index.js",
     "lint": "eslint src --max-warnings=0",
     "server": "json-server --watch src/mocks/db.json"
   },
@@ -36,6 +36,7 @@
     "@types/react": "^17.0.43",
     "@typescript-eslint/eslint-plugin": "^5.18.0",
     "@typescript-eslint/parser": "^5.18.0",
+    "dotenv": "^16.0.0",
     "eslint": "^8.12.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
