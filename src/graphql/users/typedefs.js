@@ -6,14 +6,15 @@ export const userTypeDefs = gql`
     users(filter: FiltersInput): [User]
   }
 
-  union UserResult = UserNotFound | User
+  union UserResult = User | UserNotFound
 
   type User {
     id: ID!
+    indexRef: Int!
     firstName: String!
     lastName: String!
     userName: String!
-    indexRef: Int!
+    posts: [Post]
     created_at: String!
   }
 

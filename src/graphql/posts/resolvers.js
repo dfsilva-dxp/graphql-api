@@ -33,10 +33,9 @@ export const postResolvers = {
       }).format(new Date(post.createdAt));
     },
 
-    user: async ({ userId }, _, { api }) => {
-      const data = await api.get(`users/${userId}`).then(({ data }) => data);
-
-      return data;
+    user: async ({ userId }, _, { userDataLoader }) => {
+      console.log(userId);
+      return userDataLoader.load(userId);
     }
   },
 

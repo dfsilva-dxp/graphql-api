@@ -31,6 +31,10 @@ export const userResolvers = {
         dateStyle: "short",
         timeStyle: "short"
       }).format(new Date(user.createdAt));
+    },
+
+    posts: async ({ id }, _, { postsDataLoader }) => {
+      return postsDataLoader.load(id);
     }
   },
 

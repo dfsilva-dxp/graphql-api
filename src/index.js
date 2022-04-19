@@ -2,6 +2,7 @@ import { ApolloServer } from "apollo-server";
 
 import { api } from "./services/api";
 
+import { makeDataLoader } from "./utils/makeDataLoader";
 import { typeDefs, resolvers } from "./graphql/schema";
 
 const server = new ApolloServer({
@@ -10,7 +11,9 @@ const server = new ApolloServer({
 
   context: () => {
     return {
-      api
+      api,
+      userDataLoader: makeDataLoader.users(api),
+      postsDataLoader: makeDataLoader.posts(api)
     };
   }
 });
