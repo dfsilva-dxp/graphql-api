@@ -31,7 +31,6 @@ export const makeDataLoader = {
 
       const posts = ids.map((id) => data.filter((post) => post.userId === id));
 
-      console.log(posts);
       return posts;
     });
   }
