@@ -1,25 +1,13 @@
-const post = async (_, { id }, { api }) => {
-  const data = await api
-    .get(`posts/${id}`)
-    .then(({ data }) => data)
-    .catch(({ response }) => ({
-      status: response.status,
-      message: `Post ${response.statusText}`
-    }));
+const post = async (_, { id }, { dataSources }) => {
+  const response = dataSources.api.getPost(id);
 
-  return data;
+  return response;
 };
 
-const posts = async (_, { filter }, { api }) => {
-  const queryParams = new URLSearchParams(filter);
+const posts = async (_, { filter }, { dataSources }) => {
+  const response = dataSources.api.getPosts(filter);
 
-  const url = queryParams.toString()
-    ? `posts/?${queryParams.toString()}`
-    : "posts";
-
-  const data = await api.get(url).then(({ data }) => data);
-
-  return data;
+  return response;
 };
 
 export const postResolvers = {
