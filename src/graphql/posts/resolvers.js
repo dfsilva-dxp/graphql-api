@@ -22,7 +22,6 @@ export const postResolvers = {
     },
 
     user: async ({ userId }, _, { userDataLoader }) => {
-      console.log(userId);
       return userDataLoader.load(userId);
     }
   },
