@@ -10,10 +10,18 @@ export class UsersAPI extends RESTDataSource {
   }
 
   async getUser(id) {
-    return this.get(id);
+    return this.get(id, undefined, {
+      cacheOptions: {
+        ttl: 60 * 60 // 1 hours
+      }
+    });
   }
 
   async getUsers(params = {}) {
-    return this.get("", params);
+    return this.get("", params, {
+      cacheOptions: {
+        ttl: 60 * 60 // 1 hours
+      }
+    });
   }
 }
