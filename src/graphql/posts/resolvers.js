@@ -21,8 +21,9 @@ export const postResolvers = {
       }).format(new Date(post.createdAt));
     },
 
-    user: async ({ userId }, _, { userDataLoader }) => {
-      return userDataLoader.load(userId);
+    user: async ({ userId }, _, { dataSources }) => {
+      const response = await dataSources.userAPI.dataLoader.load(userId);
+      return response;
     }
   },
 
