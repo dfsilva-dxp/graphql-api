@@ -1,11 +1,11 @@
 const post = async (_, { id }, { dataSources }) => {
-  const response = dataSources.api.getPost(id);
+  const response = dataSources.postAPI.getPost(id);
 
   return response;
 };
 
 const posts = async (_, { filter }, { dataSources }) => {
-  const response = dataSources.api.getPosts(filter);
+  const response = dataSources.postAPI.getPosts(filter);
 
   return response;
 };

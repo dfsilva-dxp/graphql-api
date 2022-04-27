@@ -1,25 +1,13 @@
-const user = async (_, { id }, { api }) => {
-  const data = await api
-    .get(`users/${id}`)
-    .then(({ data }) => data)
-    .catch(({ response }) => ({
-      status: response.status,
-      message: `User ${response.statusText}`
-    }));
+const user = async (_, { id }, { dataSources }) => {
+  const response = dataSources.userAPI.getUser(id);
 
-  return data;
+  return response;
 };
 
-const users = async (_, { filter }, { api }) => {
-  const queryParams = new URLSearchParams(filter);
+const users = async (_, { filter }, { dataSources }) => {
+  const response = dataSources.userAPI.getUsers(filter);
 
-  const url = queryParams.toString()
-    ? `users/?${queryParams.toString()}`
-    : "users";
-
-  const data = await api.get(url).then(({ data }) => data);
-
-  return data;
+  return response;
 };
 
 export const userResolvers = {
