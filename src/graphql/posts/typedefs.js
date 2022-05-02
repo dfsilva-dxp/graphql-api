@@ -6,6 +6,10 @@ export const postsTypeDefs = gql`
     posts(filter: FiltersInput): [Post!]!
   }
 
+  extend type Mutation {
+    createPost(data: CreatePostInput!): PostResult!
+  }
+
   union PostResult = Post | PostNotFound
 
   type Post {
@@ -21,5 +25,11 @@ export const postsTypeDefs = gql`
   type PostNotFound {
     status: Int!
     message: String!
+  }
+
+  input CreatePostInput {
+    title: String!
+    body: String!
+    userId: String!
   }
 `;

@@ -1,5 +1,6 @@
 import { RESTDataSource } from "apollo-datasource-rest";
 import { makeDataLoader } from "../../utils/makeDataLoader";
+import { createNewPost } from "./utils/validateData";
 
 export class PostsAPI extends RESTDataSource {
   constructor() {
@@ -23,5 +24,11 @@ export class PostsAPI extends RESTDataSource {
         ttl: 60 * 60 // 1 hours
       }
     });
+  }
+
+  async createPost(data) {
+    createNewPost(data, this);
+
+    return data;
   }
 }

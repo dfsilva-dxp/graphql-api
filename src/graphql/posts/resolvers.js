@@ -1,31 +1,17 @@
-const post = async (_, { id }, { dataSources }) => {
-  const response = dataSources.postAPI.getPost(id);
+import { post } from "./queries/postResolvers";
+import { posts } from "./queries/postsResolvers";
 
-  return response;
-};
+import { created_at } from "./fields/createdAtResolvers";
+import { user } from "./fields/userResolvers";
 
-const posts = async (_, { filter }, { dataSources }) => {
-  const response = dataSources.postAPI.getPosts(filter);
-
-  return response;
-};
+import { createPost } from "./mutations/createPost";
 
 export const postResolvers = {
   Query: { post, posts },
 
-  Post: {
-    created_at: (post) => {
-      return new Intl.DateTimeFormat("pt-BR", {
-        dateStyle: "short",
-        timeStyle: "short"
-      }).format(new Date(post.createdAt));
-    },
+  Mutation: { createPost },
 
-    user: async ({ userId }, _, { dataSources }) => {
-      const response = await dataSources.userAPI.dataLoader.load(userId);
-      return response;
-    }
-  },
+  Post: { created_at, user },
 
   PostResult: {
     __resolveType: (post) => {
