@@ -27,8 +27,10 @@ export class PostsAPI extends RESTDataSource {
   }
 
   async createPost(data) {
-    createNewPost(data, this);
+    const response = await createNewPost(data, this);
 
-    return data;
+    console.log(response);
+
+    return response;
   }
 }
